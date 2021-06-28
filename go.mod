@@ -8,15 +8,17 @@ require (
 	github.com/Azure/go-autorest/autorest/adal v0.8.3 // indirect
 	github.com/asaskevich/govalidator v0.0.0-20180315120708-ccb8e960c48f
 	github.com/aws/aws-sdk-go v1.37.3
+	github.com/bazelbuild/bazel-gazelle v0.23.0
 	github.com/codegangsta/negroni v1.0.0 // indirect
 	github.com/coreos/go-semver v0.2.0
+	github.com/cyphar/filepath-securejoin v0.2.2
 	github.com/dchest/authcookie v0.0.0-20120917135355-fbdef6e99866
 	github.com/dchest/uniuri v0.0.0-20160212164326-8902c56451e9
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/drone/drone-go v1.4.1-0.20201109202657-b9e58bbbcf27
 	github.com/drone/drone-runtime v1.1.1-0.20200623162453-61e33e2cab5d
 	github.com/drone/drone-ui v0.0.0-20210623224836-9a5c77ebfdb7
-	github.com/drone/drone-yaml v1.2.4-0.20200326192514-6f4d6dfb39e4
+	github.com/drone/drone-yaml v1.2.3
 	github.com/drone/envsubst v1.0.3-0.20200709231038-aa43e1c1a629
 	github.com/drone/go-license v1.0.2
 	github.com/drone/go-login v1.0.4-0.20190311170324-2a4df4f242a2
@@ -28,7 +30,7 @@ require (
 	github.com/go-ini/ini v1.39.0 // indirect
 	github.com/go-sql-driver/mysql v1.4.0
 	github.com/golang/mock v1.3.1
-	github.com/google/go-cmp v0.4.0
+	github.com/google/go-cmp v0.5.4
 	github.com/google/go-jsonnet v0.17.0
 	github.com/google/wire v0.2.1
 	github.com/gorhill/cronexpr v0.0.0-20140423231348-a557574d6c02 // indirect
@@ -64,7 +66,7 @@ require (
 	github.com/unrolled/secure v0.0.0-20181022170031-4b6b7cf51606
 	go.starlark.net v0.0.0-20201118183435-e55f603d8c79
 	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9
-	golang.org/x/sync v0.0.0-20190423024810-112230192c58
+	golang.org/x/sync v0.0.0-20190911185100-cd5d95a43a6e
 	gopkg.in/ini.v1 v1.57.0 // indirect
 	gopkg.in/yaml.v2 v2.2.8
 	k8s.io/api v0.0.0-20181130031204-d04500c8c3dd

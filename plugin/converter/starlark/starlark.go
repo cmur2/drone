@@ -16,10 +16,14 @@ package starlark
 
 import (
 	"bytes"
+	"io/ioutil"
+	"path"
 
 	"github.com/drone/drone/core"
 	"github.com/drone/drone/handler/api/errors"
 
+	"github.com/bazelbuild/bazel-gazelle/label"
+	securejoin "github.com/cyphar/filepath-securejoin"
 	"github.com/sirupsen/logrus"
 	"go.starlark.net/starlark"
 )
@@ -57,7 +61,7 @@ var (
 func Parse(req *core.ConvertArgs, template *core.Template, templateData map[string]interface{}) (string, error) {
 	thread := &starlark.Thread{
 		Name: "drone",
-		Load: noLoad,
+		Load: loadExtension,
 		Print: func(_ *starlark.Thread, msg string) {
 			logrus.WithFields(logrus.Fields{
 				"namespace": req.Repo.Namespace,
@@ -134,6 +138,44 @@ func Parse(req *core.ConvertArgs, template *core.Template, templateData map[stri
 	return buf.String(), nil
 }
 
-func noLoad(_ *starlark.Thread, _ string) (starlark.StringDict, error) {
-	return nil, ErrCannotLoad
+// TODO: https://github.com/drone/drone/blob/ca454594021099909fb4ee9471720cacfe3207bd/scripts/build.sh#L8
+
+// Source: https://github.com/drone/drone-convert-starlark/commit/0a532618c6ee7705964762efe37e380865643a8a
+func loadExtension(thread *starlark.Thread, labelStr string) (starlark.StringDict, error) {
+	// Breaks a label string into a struct that separates out the
+	// repo name, package path, and extension name.
+	parsedLabel, err1 := label.Parse(labelStr)
+	if err1 != nil {
+		return nil, err1
+	}
+
+	// We don't (yet) support loading extensions from within the repo
+	// that is being built.
+	if parsedLabel.Repo == "" {
+		return nil, errors.New("loadExtension: label's repo cannot be empty")
+	}
+
+	if parsedLabel.Relative {
+		return nil, errors.New("loadExtension: label cannot be relative")
+	}
+
+	// https://docs.bazel.build/versions/main/build-ref.html#load
+
+	// extensionPath := path.Join("/var/starlark-repo/", parsedLabel.Repo, parsedLabel.Pkg, parsedLabel.Name)
+	extensionPath, err2 := securejoin.SecureJoin("/var/starlark-repo", path.Join(parsedLabel.Repo, parsedLabel.Pkg, parsedLabel.Name))
+	if err2 != nil {
+		return nil, err2
+	}
+
+	extensionContents, err3 := ioutil.ReadFile(extensionPath)
+	if err3 != nil {
+		return nil, err3
+	}
+
+	globals, err4 := starlark.ExecFile(thread, extensionPath, extensionContents, nil)
+	if err4 != nil {
+		return nil, err4
+	}
+
+	return globals, nil
 }

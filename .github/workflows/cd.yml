@@ -1,0 +1,33 @@
+---
+name: cd
+
+on:
+  push:
+    tags:
+    - '*.*.*.*'
+
+jobs:
+  release-dockerimage:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Extract my version from tag name
+      run: |
+        echo "MY_VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+    # https://github.com/marketplace/actions/build-and-push-docker-images
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v1
+
+    - name: Login to Docker Hub
+      uses: docker/login-action@v1
+      with:
+        username: cmur2
+        password: ${{ secrets.DOCKER_TOKEN }}
+
+    - name: Build and push Docker image for my drone ${{ env.MY_VERSION }}
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: docker/Dockerfile.server.linux.amd64
+        push: true
+        tags: cmur2/my-drone:v${{ env.MY_VERSION }}

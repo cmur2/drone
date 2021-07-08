@@ -12,7 +12,7 @@ jobs:
     steps:
     - name: Avoid stale tags by pulling
       run: |
-        ALL_IMAGES="$(curl -s https://hub.docker.com/v2/repositories/cmur2/my-drone/tags?page_size=1000 | jq -r '.results[].name | "cmur2/my-etherpad-lite:" + .' | grep -e 'cmur2/my-drone:v')"
+        ALL_IMAGES="$(curl -s https://hub.docker.com/v2/repositories/cmur2/my-drone/tags?page_size=1000 | jq -r '.results[].name | "cmur2/my-drone:" + .' | grep -e 'cmur2/my-drone:v')"
         for image in $ALL_IMAGES; do
           echo "Pulling $image to avoid staleness..."
           docker pull "$image"

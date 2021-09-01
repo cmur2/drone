@@ -1,6 +1,5 @@
----
 kind: template
-load: plugin.starlark
+load: plugin.txt
 data:
   stepName: my_step
   image: my_image

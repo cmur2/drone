@@ -144,7 +144,8 @@ type (
 
 	// Starlark configures the starlark plugin
 	Starlark struct {
-		Enabled bool `envconfig:"DRONE_STARLARK_ENABLED"`
+		Enabled   bool   `envconfig:"DRONE_STARLARK_ENABLED"`
+		StepLimit uint64 `envconfig:"DRONE_STARLARK_STEP_LIMIT"`
 	}
 
 	// License provides license configuration
@@ -275,10 +276,9 @@ type (
 
 	// Session provides the session configuration.
 	Session struct {
-		Timeout     time.Duration `envconfig:"DRONE_COOKIE_TIMEOUT" default:"720h"`
-		Secret      string        `envconfig:"DRONE_COOKIE_SECRET"`
-		Secure      bool          `envconfig:"DRONE_COOKIE_SECURE"`
-		MappingFile string        `envconfig:"DRONE_LEGACY_TOKEN_MAPPING_FILE"`
+		Timeout time.Duration `envconfig:"DRONE_COOKIE_TIMEOUT" default:"720h"`
+		Secret  string        `envconfig:"DRONE_COOKIE_SECRET"`
+		Secure  bool          `envconfig:"DRONE_COOKIE_SECURE"`
 	}
 
 	// Status provides status configurations.
@@ -487,17 +487,28 @@ func (c *Config) IsStash() bool {
 	return c.Stash.Server != ""
 }
 
+func cleanHostname(hostname string) string {
+	hostname = strings.ToLower(hostname)
+	hostname = strings.TrimPrefix(hostname, "http://")
+	hostname = strings.TrimPrefix(hostname, "https://")
+
+	return hostname
+}
+
 func defaultAddress(c *Config) {
 	if c.Server.Key != "" || c.Server.Cert != "" || c.Server.Acme {
 		c.Server.Port = ":443"
 		c.Server.Proto = "https"
 	}
+	c.Server.Host = cleanHostname(c.Server.Host)
 	c.Server.Addr = c.Server.Proto + "://" + c.Server.Host
 }
 
 func defaultProxy(c *Config) {
 	if c.Proxy.Host == "" {
 		c.Proxy.Host = c.Server.Host
+	} else {
+		c.Proxy.Host = cleanHostname(c.Proxy.Host)
 	}
 	if c.Proxy.Proto == "" {
 		c.Proxy.Proto = c.Server.Proto

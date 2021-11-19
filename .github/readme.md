@@ -1,7 +1,6 @@
 # [Drone](https://www.drone.io/) <img src="https://github.com/drone/brand/blob/master/screenshots/screenshot_build_success.png" style="max-width:100px;" />
 **Welcome to the Drone codebase, we are thrilled to have you here!** 
 
-
 ## What is Drone?
 Drone is a continuous delivery system built on container technology. Drone uses a simple YAML build file, to define and execute build pipelines inside Docker containers. 
  
@@ -36,7 +35,7 @@ This section of the [documentation](http://docs.drone.io/installation/) will hel
 
 ### Usage Documentation
 
-Our [documentation](http://docs.drone.io/getting-started/) can help you get started with the different types of pipelines/builds. There are different runners / plugins / extensions designed for different use cases to help make an efficent and simple build pipeline
+Our [documentation](http://docs.drone.io/getting-started/) can help you get started with the different types of pipelines/builds. There are different runners / plugins / extensions designed for different use cases to help make an efficient and simple build pipeline
 
 ### Plugin Index
 
@@ -46,7 +45,7 @@ Plugins are used in build steps to perform actions, eg send a message to slack o
 
 This build file contains a single pipeline (you can have multiple pipelines too) that builds a go application. The front end with npm. Publishes the docker container to a registry and announces the results to a slack room.
 
-```yaml
+```YAML
 name: default
 
 kind: pipeline
@@ -110,7 +109,7 @@ Next we tag the PR's with the fixes or enhancements labels. If the PR does not f
 Run the changelog generator again with the future version according to semver.
 
 ```BASH
-docker run -it --rm -v "$(pwd)":/usr/local/src/your-app githubchangeloggenerator/github-changelog-generator -u drone -p drone -t <secret token> --future-release v1.0.0
+docker run -it --rm -v "$(pwd)":/usr/local/src/your-app githubchangeloggenerator/github-changelog-generator -u harness -p drone -t <secret token> --future-release v1.0.0
 ```
 
 Create your pull request for the release. Get it merged then tag the release.

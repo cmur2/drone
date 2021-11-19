@@ -23,6 +23,7 @@ import (
 	"github.com/drone/drone/handler/api/auth"
 	"github.com/drone/drone/handler/api/badge"
 	globalbuilds "github.com/drone/drone/handler/api/builds"
+	"github.com/drone/drone/handler/api/card"
 	"github.com/drone/drone/handler/api/ccmenu"
 	"github.com/drone/drone/handler/api/events"
 	"github.com/drone/drone/handler/api/queue"
@@ -63,6 +64,7 @@ var corsOpts = cors.Options{
 func New(
 	builds core.BuildStore,
 	commits core.CommitService,
+	card core.CardStore,
 	cron core.CronStore,
 	events core.Pubsub,
 	globals core.GlobalSecretStore,
@@ -92,6 +94,7 @@ func New(
 ) Server {
 	return Server{
 		Builds:     builds,
+		Card:       card,
 		Cron:       cron,
 		Commits:    commits,
 		Events:     events,
@@ -125,6 +128,7 @@ func New(
 // Server is a http.Handler which exposes drone functionality over HTTP.
 type Server struct {
 	Builds     core.BuildStore
+	Card       core.CardStore
 	Cron       core.CronStore
 	Commits    core.CommitService
 	Events     core.Pubsub
@@ -285,6 +289,16 @@ func (s Server) Handler() http.Handler {
 					acl.CheckAdminAccess(),
 				).Delete("/{member}", collabs.HandleDelete(s.Users, s.Repos, s.Perms))
 			})
+
+			r.Route("/cards", func(r chi.Router) {
+				r.Get("/{build}/{stage}/{step}", card.HandleFind(s.Builds, s.Card, s.Stages, s.Steps, s.Repos))
+				r.With(
+					acl.CheckAdminAccess(),
+				).Post("/{build}/{stage}/{step}", card.HandleCreate(s.Builds, s.Card, s.Stages, s.Steps, s.Repos))
+				r.With(
+					acl.CheckAdminAccess(),
+				).Delete("/{build}/{stage}/{step}", card.HandleDelete(s.Builds, s.Card, s.Stages, s.Steps, s.Repos))
+			})
 		})
 	})
 
@@ -345,6 +359,7 @@ func (s Server) Handler() http.Handler {
 	r.Route("/builds", func(r chi.Router) {
 		r.Use(acl.AuthorizeAdmin)
 		r.Get("/incomplete", globalbuilds.HandleIncomplete(s.Repos))
+		r.Get("/incomplete/v2", globalbuilds.HandleRunningStatus(s.Repos))
 	})
 
 	r.Route("/secrets", func(r chi.Router) {

@@ -14,24 +14,34 @@
 
 // +build oss
 
-package builds
+package card
 
 import (
-	"net/http"
+	"context"
+	"io"
 
 	"github.com/drone/drone/core"
-	"github.com/drone/drone/handler/api/render"
+	"github.com/drone/drone/store/shared/db"
 )
 
-var notImplemented = func(w http.ResponseWriter, r *http.Request) {
-	render.NotImplemented(w, render.ErrNotImplemented)
+func New(db *db.DB) core.CardStore {
+	return new(noop)
 }
 
-// HandleIncomplete returns a no-op http.HandlerFunc.
-func HandleIncomplete(repos core.RepositoryStore) http.HandlerFunc {
-	return notImplemented
+type noop struct{}
+
+func (noop) Find(ctx context.Context, step int64) (io.ReadCloser, error) {
+	return nil, nil
 }
 
-func HandleRunningStatus(repos core.RepositoryStore) http.HandlerFunc {
-	return notImplemented
+func (noop) Create(ctx context.Context, step int64, r io.Reader) error {
+	return nil
+}
+
+func (noop) Update(ctx context.Context, step int64, r io.Reader) error {
+	return nil
+}
+
+func (noop) Delete(ctx context.Context, step int64) error {
+	return nil
 }

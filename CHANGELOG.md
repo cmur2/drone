@@ -1,6 +1,70 @@
 # Changelog
 
-## [v2.5.0](https://github.com/harness/drone/tree/v2.5.0) (2021-11-16)
+## [v2.7.3](https://github.com/harness/drone/tree/v2.7.3) (2021-12-30)
+
+[Full Changelog](https://github.com/harness/drone/compare/v2.7.2...v2.7.3)
+
+**Fixed bugs:**
+
+- bump go-scm to v1.16.3 [\#3175](https://github.com/harness/drone/pull/3175) ([eoinmcafee00](https://github.com/eoinmcafee00))
+
+## [v2.7.2](https://github.com/harness/drone/tree/v2.7.2) (2021-12-19)
+
+[Full Changelog](https://github.com/harness/drone/compare/v2.7.1...v2.7.2)
+
+**Implemented enhancements:**
+
+- bump go-scm to v1.16.2 [\#3169](https://github.com/harness/drone/pull/3169) ([kit101](https://github.com/kit101))
+
+**Fixed bugs:**
+
+- fixbug gitee provide refresher [\#3168](https://github.com/harness/drone/pull/3168) ([kit101](https://github.com/kit101))
+
+**Merged pull requests:**
+
+- release prep 2.7.2 [\#3172](https://github.com/harness/drone/pull/3172) ([eoinmcafee00](https://github.com/eoinmcafee00))
+
+## [v2.7.1](https://github.com/harness/drone/tree/v2.7.1) (2021-12-17)
+
+[Full Changelog](https://github.com/harness/drone/compare/v2.7.0...v2.7.1)
+
+**Fixed bugs:**
+
+- fixes issue with redirects on double slashes in url [\#3170](https://github.com/harness/drone/pull/3170) ([eoinmcafee00](https://github.com/eoinmcafee00))
+
+**Merged pull requests:**
+
+- release prep v2.7.1 [\#3171](https://github.com/harness/drone/pull/3171) ([eoinmcafee00](https://github.com/eoinmcafee00))
+
+## [v2.7.0](https://github.com/harness/drone/tree/v2.7.0) (2021-12-15)
+
+[Full Changelog](https://github.com/harness/drone/compare/v2.6.0...v2.7.0)
+
+**Implemented enhancements:**
+
+- bump UI to v2.4.1 [\#3167](https://github.com/harness/drone/pull/3167) ([d1wilko](https://github.com/d1wilko))
+
+**Fixed bugs:**
+
+- \(DRON-157\) use deploy string in deployment [\#3165](https://github.com/harness/drone/pull/3165) ([tphoney](https://github.com/tphoney))
+
+**Merged pull requests:**
+
+- release v2.7.0 [\#3166](https://github.com/harness/drone/pull/3166) ([d1wilko](https://github.com/d1wilko))
+
+## [v2.6.0](https://github.com/harness/drone/tree/v2.6.0) (2021-11-30)
+
+[Full Changelog](https://github.com/harness/drone/compare/v2.5.0...v2.6.0)
+
+**Implemented enhancements:**
+
+- Feat: implemented gitee client [\#3156](https://github.com/harness/drone/pull/3156) ([kit101](https://github.com/kit101))
+
+**Merged pull requests:**
+
+- release prep for v2.6.0 [\#3163](https://github.com/harness/drone/pull/3163) ([tphoney](https://github.com/tphoney))
+
+## [v2.5.0](https://github.com/harness/drone/tree/v2.5.0) (2021-11-17)
 
 [Full Changelog](https://github.com/harness/drone/compare/v2.4.0...v2.5.0)
 
@@ -16,6 +80,10 @@
 **Fixed bugs:**
 
 - fix a typo in readme [\#3150](https://github.com/harness/drone/pull/3150) ([nothatDinger](https://github.com/nothatDinger))
+
+**Merged pull requests:**
+
+- release prep for v2.5.0 [\#3161](https://github.com/harness/drone/pull/3161) ([eoinmcafee00](https://github.com/eoinmcafee00))
 
 ## [v2.4.0](https://github.com/harness/drone/tree/v2.4.0) (2021-09-23)
 

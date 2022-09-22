@@ -25,7 +25,7 @@ var (
 	// VersionMajor is for an API incompatible changes.
 	VersionMajor int64 = 2
 	// VersionMinor is for functionality in a backwards-compatible manner.
-	VersionMinor int64 = 12
+	VersionMinor int64 = 13
 	// VersionPatch is for backwards-compatible bug fixes.
 	VersionPatch int64 = 2
 	// VersionPre indicates prerelease.

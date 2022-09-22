@@ -25,7 +25,7 @@ ENV DRONE_DATADOG_ENABLED=false
 ENV DRONE_DATADOG_ENDPOINT=
 
 RUN [ ! -e /etc/nsswitch.conf ] && echo 'hosts: files dns' > /etc/nsswitch.conf && \
-    apk add --no-cache ca-certificates
+    apk add --no-cache ca-certificates tzdata
 
 COPY --from=build /go/src/app/release/linux/amd64/drone-server /bin/
 

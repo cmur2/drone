@@ -1,8 +1,28 @@
 # Changelog
 
-## [v2.12.2](https://github.com/harness/drone/tree/v2.12.2) (2022-06-15)
+## [v2.13.0](https://github.com/harness/drone/tree/v2.13.0) (2022-09-21)
 
-[Full Changelog](https://github.com/harness/drone/compare/v2.12.1...v2.12.2)
+[Full Changelog](https://github.com/harness/drone/compare/v2.12.1...v2.13.0)
+
+**Implemented enhancements:**
+
+- feat: update drone-yaml module [\#3249](https://github.com/harness/drone/pull/3249) ([jimsheldon](https://github.com/jimsheldon))
+- support time zone [\#3241](https://github.com/harness/drone/pull/3241) ([zc2638](https://github.com/zc2638))
+
+**Fixed bugs:**
+
+- update discourse.drone.io to community.harness.io [\#3261](https://github.com/harness/drone/pull/3261) ([kit101](https://github.com/kit101))
+- \(DRON-392\) cascade deletes on purge [\#3243](https://github.com/harness/drone/pull/3243) ([tphoney](https://github.com/tphoney))
+- Template converter, don't skip .yaml extension. [\#3242](https://github.com/harness/drone/pull/3242) ([staffanselander](https://github.com/staffanselander))
+
+**Merged pull requests:**
+
+- \(maint\) disable arm builds [\#3262](https://github.com/harness/drone/pull/3262) ([tphoney](https://github.com/tphoney))
+- Update links to discourse in issue template [\#3233](https://github.com/harness/drone/pull/3233) ([alikhil](https://github.com/alikhil))
+
+## [v2.12.1](https://github.com/harness/drone/tree/v2.12.1) (2022-06-15)
+
+[Full Changelog](https://github.com/harness/drone/compare/v2.12.0...v2.12.1)
 
 **Fixed bugs:**
 
@@ -12,15 +32,12 @@
 
 **Merged pull requests:**
 
+- release prep for v2.12.1 [\#3232](https://github.com/harness/drone/pull/3232) ([eoinmcafee00](https://github.com/eoinmcafee00))
 - \(maint\) fix starlark test on windows [\#3230](https://github.com/harness/drone/pull/3230) ([tphoney](https://github.com/tphoney))
 - \(maint\) fix unit tests so they pass on windows [\#3228](https://github.com/harness/drone/pull/3228) ([tphoney](https://github.com/tphoney))
 - Update Readme to Fix Typo [\#3223](https://github.com/harness/drone/pull/3223) ([hrittikhere](https://github.com/hrittikhere))
 - \(bug\) add unit test for comments in template file [\#3221](https://github.com/harness/drone/pull/3221) ([eoinmcafee00](https://github.com/eoinmcafee00))
 - Bump scm version to v1.24.0 [\#3219](https://github.com/harness/drone/pull/3219) ([kit101](https://github.com/kit101))
-
-## [v2.12.1](https://github.com/harness/drone/tree/v2.12.1) (2022-05-16)
-
-[Full Changelog](https://github.com/harness/drone/compare/v2.12.0...v2.12.1)
 
 ## [v2.12.0](https://github.com/harness/drone/tree/v2.12.0) (2022-05-16)
 
@@ -356,7 +373,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - bump user interface  
 - bump ui version
 - ignore skip directive for promote and rollback events
-- new feature: maximum open DB connections is configurable[#3089](https://github.com/drone/drone/pull/3089) 
+- new feature: maximum open DB connections is configurable[#3089](https://github.com/drone/drone/pull/3089)
 - jsonnet additional parameters [#3087](https://github.com/drone/drone/pull/3087)
 - hide login button if user already authenticated  
 - new feature: configuration templates [#3081](https://github.com/drone/drone/pull/3081)
@@ -459,7 +476,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - sync routine should ignore gitlab subrepositories
 - convert deploy events in 0.8 yaml to promote events.
 - do not execute cron job for disabled repositories. [#2931](https://github.com/drone/drone/issues/2931).
-- remove trailing slash from gitea url to prevent oauth2 token refresh errors, by [@cmj0121](https://github.com/cmj0121). [#2920](https://github.com/drone/drone/issues/2920). 
+- remove trailing slash from gitea url to prevent oauth2 token refresh errors, by [@cmj0121](https://github.com/cmj0121). [#2920](https://github.com/drone/drone/issues/2920).
 - disable font ligatures in build log output. [drone/drone-ui#322](https://github.com/drone/drone-ui/pull/322).
 - missing am/pm in timestamps
 

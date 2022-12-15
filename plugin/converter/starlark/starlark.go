@@ -33,8 +33,8 @@ const (
 	newline   = "\n"
 )
 
-// limits generated configuration file size.
-const limit = 1000000
+// default limit for generated configuration file size.
+const defaultSizeLimit = 1000000
 
 var (
 	// ErrMainMissing indicates the starlark script is missing
@@ -58,7 +58,7 @@ var (
 	ErrCannotLoad = errors.New("starlark: cannot load external scripts")
 )
 
-func Parse(req *core.ConvertArgs, template *core.Template, templateData map[string]interface{}, stepLimit uint64) (string, error) {
+func Parse(req *core.ConvertArgs, template *core.Template, templateData map[string]interface{}, stepLimit uint64, sizeLimit uint64) (string, error) {
 	thread := &starlark.Thread{
 		Name: "drone",
 		Load: loadExtension,
@@ -136,9 +136,13 @@ func Parse(req *core.ConvertArgs, template *core.Template, templateData map[stri
 		return "", ErrMainReturn
 	}
 
+	if sizeLimit == 0 {
+		sizeLimit = defaultSizeLimit
+	}
+
 	// this is a temporary workaround until we
 	// implement a LimitWriter.
-	if b := buf.Bytes(); len(b) > limit {
+	if b := buf.Bytes(); uint64(len(b)) > sizeLimit {
 		return "", ErrMaximumSize
 	}
 	return buf.String(), nil
